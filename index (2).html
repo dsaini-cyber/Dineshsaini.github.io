@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dinesh Saini | Cybersecurity Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1D9E75;
+      --green-light: #E1F5EE;
+      --green-mid: #9FE1CB;
+      --green-dark: #0F6E56;
+      --bg: #f4f4f0;
+      --surface: #ffffff;
+      --text: #1a1a18;
+      --text-muted: #6b6b67;
+      --text-faint: #999994;
+      --border: rgba(0,0,0,0.10);
+      --border-strong: rgba(0,0,0,0.18);
+      --radius-md: 8px;
+      --radius-lg: 14px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a18;
+        --surface: #242422;
+        --text: #f0ede8;
+        --text-muted: #9a9a96;
+        --text-faint: #5f5f5c;
+        --border: rgba(255,255,255,0.10);
+        --border-strong: rgba(255,255,255,0.18);
+        --green-light: #0a3326;
+        --green-mid: #0f5240;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 56px;
+    }
+
+    .nav-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      color: var(--green);
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px; color: var(--text-muted);
+      text-decoration: none; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+    section { margin-bottom: 4rem; }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-faint);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge-tag {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; padding: 4px 12px;
+      border-radius: 20px; margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-sub {
+      font-size: 15px; color: var(--text-muted);
+      max-width: 460px; margin-bottom: 1.5rem; line-height: 1.7;
+    }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 22px; border-radius: var(--radius-md);
+      font-size: 13px; font-weight: 500;
+      text-decoration: none; cursor: pointer;
+      font-family: 'Syne', sans-serif;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary { background: var(--green); color: #fff; border: none; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      background: transparent;
+      border: 0.5px solid var(--border-strong);
+      color: var(--text);
+    }
+    .btn-ghost:hover { background: var(--bg); }
+
+    .hero-circle {
+      flex-shrink: 0;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: var(--green-light);
+      border: 0.5px solid var(--green-mid);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .hero-circle .initials {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px; font-weight: 700;
+      color: var(--green-dark);
+    }
+    .hero-circle .circ-sub {
+      font-size: 10px; color: var(--green-dark);
+      line-height: 1.3;
+    }
+
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } .hero { flex-direction: column; } .hero-circle { display: none; } }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+    }
+
+    /* ── SKILLS ── */
+    .skill-group { margin-bottom: 1rem; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group-name { font-size: 11px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill {
+      font-size: 12px; font-weight: 500;
+      padding: 4px 12px; border-radius: 20px;
+    }
+    .pill-green { background: #EAF3DE; color: #3B6D11; }
+    .pill-blue  { background: #E6F1FB; color: #185FA5; }
+    .pill-amber { background: #FAEEDA; color: #854F0B; }
+    .pill-purple{ background: #EEEDFE; color: #3C3489; }
+    .pill-coral { background: #FAECE7; color: #993C1D; }
+    @media (prefers-color-scheme: dark) {
+      .pill-green { background: #173404; color: #C0DD97; }
+      .pill-blue  { background: #042C53; color: #B5D4F4; }
+      .pill-amber { background: #412402; color: #FAC775; }
+      .pill-purple{ background: #26215C; color: #CECBF6; }
+      .pill-coral { background: #4A1B0C; color: #F5C4B3; }
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 1.25rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border-strong);
+    }
+    .tl-item { position: relative; padding-bottom: 1.5rem; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -1.25rem; top: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%; background: var(--green);
+      transform: translateX(-3.5px);
+    }
+    .tl-title { font-size: 14px; font-weight: 500; color: var(--text); }
+    .tl-org { font-size: 13px; color: var(--green); margin: 2px 0; }
+    .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-faint); margin-bottom: 6px; }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li { font-size: 13px; color: var(--text-muted); padding: 2px 0; padding-left: 14px; position: relative; line-height: 1.5; }
+    .tl-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--green); }
+
+    /* ── PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .proj-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .proj-card:hover { border-color: var(--green); }
+    .proj-icon {
+      width: 36px; height: 36px; border-radius: var(--radius-md);
+      background: var(--green-light); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; color: var(--green-dark); font-weight: 500;
+    }
+    .proj-name { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+    .proj-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .proj-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; background: var(--bg); color: var(--text-faint); border: 0.5px solid var(--border); }
+
+    /* ── CERTS ── */
+    .cert-list { list-style: none; }
+    .cert-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 0.5px solid var(--border);
+    }
+    .cert-item:last-child { border-bottom: none; }
+    .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .cert-name { font-size: 13px; color: var(--text); }
+    .cert-issuer { font-size: 11px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; }
+
+    /* ── EDUCATION ── */
+    .edu-item { padding: 0.75rem 0; border-bottom: 0.5px solid var(--border); }
+    .edu-item:last-child { border-bottom: none; }
+    .edu-degree { font-size: 13px; font-weight: 500; color: var(--text); }
+    .edu-school { font-size: 12px; color: var(--green); margin: 2px 0; }
+    .edu-year { font-size: 11px; color: var(--text-faint); font-family: 'JetBrains Mono', monospace; }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .contact-line { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .contact-line a { color: var(--green); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-faint);
+      border-top: 0.5px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">dinesh_saini.sh</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section id="about">
+    <div class="hero">
+      <div>
+        <div class="hero-badge-tag">Open to work &nbsp;·&nbsp; SOC Analyst / Cybersecurity Analyst</div>
+        <h1>Dinesh Saini</h1>
+        <p class="hero-sub">
+          Cybersecurity graduate with hands-on experience in threat detection, SIEM monitoring,
+          and incident response. Built a home SOC lab simulating real-world cyber attacks and
+          detecting them using Splunk.
+        </p>
+        <div class="btn-row">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="https://linkedin.com/in/dinesh-saini-cybersecurity" class="btn btn-ghost" target="_blank">LinkedIn →</a>
+          <a href="mailto:dineshsaini.work@gmail.com" class="btn btn-ghost">Email me</a>
+        </div>
+      </div>
+      <div class="hero-circle">
+        <span class="initials">DS</span>
+        <span class="circ-sub">CompTIA<br>SEC+ 701</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Skills</p>
+    <div class="card">
+      <div class="skill-group">
+        <div class="skill-group-name">SIEM &amp; Monitoring</div>
+        <div class="pills">
+          <span class="pill pill-green">Splunk</span>
+          <span class="pill pill-green">AlienVault OSSIM</span>
+          <span class="pill pill-green">Sysmon</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Attack &amp; Pentesting</div>
+        <div class="pills">
+          <span class="pill pill-coral">Metasploit</span>
+          <span class="pill pill-coral">Kali Linux</span>
+          <span class="pill pill-coral">Hydra</span>
+          <span class="pill pill-coral">Nmap</span>
+          <span class="pill pill-coral">Mimikatz</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Network Security</div>
+        <div class="pills">
+          <span class="pill pill-blue">TCP/IP</span>
+          <span class="pill pill-blue">Wireshark</span>
+          <span class="pill pill-blue">VMware</span>
+          <span class="pill pill-blue">CCNA</span>
+          <span class="pill pill-blue">Packet Tracer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Vulnerability &amp; Compliance</div>
+        <div class="pills">
+          <span class="pill pill-amber">Qualys</span>
+          <span class="pill pill-amber">MFA</span>
+          <span class="pill pill-amber">SPF/DKIM/DMARC</span>
+          <span class="pill pill-amber">Incident Response</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Programming &amp; Analysis</div>
+        <div class="pills">
+          <span class="pill pill-purple">Python</span>
+          <span class="pill pill-purple">Data Analysis</span>
+          <span class="pill pill-purple">Automation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Work Experience</p>
+    <div class="card">
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Cybersecurity / IT Support Associate</div>
+          <div class="tl-org">The Compdoc — Brampton, ON</div>
+          <div class="tl-date">Sep 2025 – Dec 2025</div>
+          <ul class="tl-bullets">
+            <li>Monitored endpoints, servers, and networks for threats, malware, and vulnerabilities; supported incident response.</li>
+            <li>Delivered Tier 1–2 IT support covering Windows, Microsoft 365, VOIP, email, and cloud apps via ticketing systems.</li>
+            <li>Implemented security controls including MFA, password policies, SPF/DKIM/DMARC, backups, and documentation.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Network Engineer II</div>
+          <div class="tl-org">Congruex Asia Pacific LLP — Mohali, India</div>
+          <div class="tl-date">Apr 2022 – Feb 2024</div>
+          <ul class="tl-bullets">
+            <li>Designed FTTH infrastructure layouts using AutoCAD, O-Calc, SPIDAcalc, and ARAMIS per permitting standards.</li>
+            <li>Performed make-ready engineering (MRE) for Charter Communications, Brightspeed, and AT&T.</li>
+            <li>Provided onboarding and software training for new team members on department standards and tools.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Network Engineer I</div>
+          <div class="tl-org">Congruex Asia Pacific LLP — Mohali, India</div>
+          <div class="tl-date">Jul 2021 – Mar 2022</div>
+          <ul class="tl-bullets">
+            <li>Developed optimal fiber routes (aerial, underground, open trench) in collaboration with project managers.</li>
+            <li>Conducted design reviews to detect errors and improve project efficiency and quality.</li>
+            <li>Planned network paths using ARAMIS and prepared initial design documents for AT&T.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Trainee — Python &amp; Data Analysis</div>
+          <div class="tl-org">NIELIT — Kurukshetra, India</div>
+          <div class="tl-date">Jun 2019 – Jul 2019</div>
+          <ul class="tl-bullets">
+            <li>Built and trained ML models on real-world datasets; developed foundations in data processing and algorithm design.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-title">Trainee — Embedded Systems</div>
+          <div class="tl-org">Taksati Innovations — Kurukshetra, India</div>
+          <div class="tl-date">Jun 2018 – Jul 2018</div>
+          <ul class="tl-bullets">
+            <li>Worked on PCB design and microcontroller-based automation; gained insights into hardware-level security.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-icon">SOC</div>
+        <div class="proj-name">Splunk SIEM Home Lab</div>
+        <div class="proj-desc">
+          Three-VM VMware environment simulating real-world attacks — brute force, SYN flood, and remote code execution —
+          detected and analyzed using Splunk SIEM with Sysmon and Universal Forwarder.
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Splunk</span>
+          <span class="proj-tag">Sysmon</span>
+          <span class="proj-tag">Kali Linux</span>
+          <span class="proj-tag">VMware</span>
+          <span class="proj-tag">Metasploit</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon">ML</div>
+        <div class="proj-name">Diabetes Prediction (ML)</div>
+        <div class="proj-desc">
+          Machine learning model to predict diabetes risk using real-world medical datasets.
+          Applied data preprocessing, feature engineering, and model evaluation.
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Scikit-learn</span>
+          <span class="proj-tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon">ECG</div>
+        <div class="proj-name">ECG Monitor</div>
+        <div class="proj-desc">
+          Hardware project for real-time ECG signal monitoring, involving circuit design
+          and embedded system integration for biomedical signal acquisition.
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Embedded Systems</span>
+          <span class="proj-tag">Electronics</span>
+          <span class="proj-tag">PCB Design</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-icon">IoT</div>
+        <div class="proj-name">Home Automation (Arduino)</div>
+        <div class="proj-desc">
+          Arduino-based home automation system for real-time control of household devices,
+          integrating microcontroller programming and sensor interfacing.
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">Arduino</span>
+          <span class="proj-tag">IoT</span>
+          <span class="proj-tag">Automation</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <p class="section-label">Certifications</p>
+    <div class="grid-2">
+      <div class="card">
+        <ul class="cert-list">
+          <li class="cert-item">
+            <div class="cert-dot"></div>
+            <div>
+              <div class="cert-name">CompTIA Security+ 701</div>
+              <div class="cert-issuer">CompTIA</div>
+            </div>
+          </li>
+          <li class="cert-item">
+            <div class="cert-dot"></div>
+            <div>
+              <div class="cert-name">Data Analysis with Python</div>
+              <div class="cert-issuer">Jovian Code Camp</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul class="cert-list">
+          <li class="cert-item">
+            <div class="cert-dot"></div>
+            <div>
+              <div class="cert-name">Deep Learning with PyTorch</div>
+              <div class="cert-issuer">Jovian Code Camp</div>
+            </div>
+          </li>
+          <li class="cert-item">
+            <div class="cert-dot"></div>
+            <div>
+              <div class="cert-name">Python &amp; Machine Learning</div>
+              <div class="cert-issuer">NIELIT</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Education</p>
+    <div class="card">
+      <div class="edu-item">
+        <div class="edu-degree">Cybersecurity</div>
+        <div class="edu-school">Sault College — Brampton Campus, Ontario</div>
+        <div class="edu-year">2025</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">Bachelor of Electronics and Communication Engineering</div>
+        <div class="edu-school">University Institute of Engineering & Technology — Kurukshetra, India</div>
+        <div class="edu-year">2020</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">Diploma in Electronics and Communication Engineering</div>
+        <div class="edu-school">Seth Jai Parkash Polytechnic — Damla, India</div>
+        <div class="edu-year">2016</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-card">
+      <div>
+        <div class="contact-line">📍 Brampton, Ontario, Canada</div>
+        <div class="contact-line">📞 <a href="tel:4379559639">(437) 955-9639</a></div>
+        <div class="contact-line">✉️ <a href="mailto:dineshsaini.work@gmail.com">dineshsaini.work@gmail.com</a></div>
+        <div class="contact-line">🔗 <a href="https://linkedin.com/in/dinesh-saini-cybersecurity" target="_blank">linkedin.com/in/dinesh-saini-cybersecurity</a></div>
+      </div>
+      <a href="mailto:dineshsaini.work@gmail.com" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Built with HTML · Dinesh Saini © 2025
+</footer>
+
+</body>
+</html>
